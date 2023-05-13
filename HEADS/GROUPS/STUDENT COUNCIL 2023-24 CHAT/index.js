@@ -188,7 +188,7 @@ window.onload = function() {
         // "Logout" is really just deleting the name from the localStorage
         chat_logout.onclick = function(){
           // Go back to home page
-          window.open("../index.html")
+          window.location = "../index.html";
         }
   
         chat_logout_container.append(chat_logout)
