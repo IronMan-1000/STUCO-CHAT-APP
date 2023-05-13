@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+	<!-- Bootstrap theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>Login</title>
+</head>
+<body>
+
+<div class="navbar navbar-default">
+<div class="navbar-header">
+  <a class="navbar-brand">Vice Captains Login</a>
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+  </button>
+</div>
+
+</div>
+<br>
+<div class="container">	
+	<form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data" >
+	<div class="col-sm-4">
+		<div class="form-group">
+	      <label for="email">Email</label>
+		  <input type="text" name="login_email" id="login_email" class="form-control" placeholder="Enter your email">
+		</div>
+		
+		<div class="form-group">
+	      <label for="password">Password</label>
+		  <input type="password" name="login_password" id="login_password" class="form-control"  placeholder="Enter your password">
+		</div>
+		<button type="button" id="login" name="login" class="btn btn-success">Login</button>
+	</div><!-- end col -->
+	
+  </div><!--  end row -->		
+  </form>
+</div>
+
+</body>
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+	  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+	  import { getAuth,  signInWithEmailAndPassword,  } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+		apiKey: "AIzaSyA2s63SV5q-zSMTGNoIX9CgqDWh69wyl8E",
+		authDomain: "vicecaptain-auth.firebaseapp.com",
+		projectId: "vicecaptain-auth",
+		storageBucket: "vicecaptain-auth.appspot.com",
+		messagingSenderId: "874005728980",
+		appId: "1:874005728980:web:a68c449f4f7b1b54a03541"
+		};
+
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const analytics = getAnalytics(app);
+	  const auth = getAuth();
+	  console.log(app);
+
+	  
+
+
+	  //----- Login code start	  
+	  document.getElementById("login").addEventListener("click", function() {
+		  var email =  document.getElementById("login_email").value;
+		  var password = document.getElementById("login_password").value;
+
+		  signInWithEmailAndPassword(auth, email, password)
+		  .then((userCredential) => {
+		    // Signed in 
+		    const user = userCredential.user;
+		    console.log(user);
+		    alert(user.email+" Login successfully!!!");
+		    window.location = "GROUPS/index.html";
+		    // ...
+		  })
+		  .catch((error) => {
+		    const errorCode = error.code;
+		    const errorMessage = error.message;
+		    console.log(errorMessage);
+		    alert(errorMessage);
+		  });		  		  
+	  });
+	  //----- End
+
+
+	</script>
+</html>
